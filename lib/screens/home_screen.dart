@@ -26,10 +26,14 @@ class HomeScreen extends StatelessWidget {
         ),
         body: FutureBuilder(
           future: webtoons, //await 해줄 필요 없이 futureBuilder가 해줌
-          builder: (context, snapshot) {
+          builder: (context, AsyncSnapshot snapshot) {
             //snapshot을 이용하면 Future의 상태를 알 수 있음 - Future가 데이터를 받았는지, 아니면 오류를 받았는지 알 수 있음. connectionState도 알 수 있음
             if (snapshot.hasData) {
-              return const Text("There is data!");
+              return ListView(
+                children: [
+                  for (var webtoon in snapshot.data!) Text(webtoon.title),
+                ],
+              );
             }
             return const Center(
               child: CircularProgressIndicator(),
