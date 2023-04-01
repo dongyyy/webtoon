@@ -29,10 +29,17 @@ class HomeScreen extends StatelessWidget {
           builder: (context, AsyncSnapshot snapshot) {
             //snapshot을 이용하면 Future의 상태를 알 수 있음 - Future가 데이터를 받았는지, 아니면 오류를 받았는지 알 수 있음. connectionState도 알 수 있음
             if (snapshot.hasData) {
-              return ListView(
-                children: [
-                  for (var webtoon in snapshot.data!) Text(webtoon.title),
-                ],
+              return ListView.separated(
+                scrollDirection: Axis.horizontal,
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
+                  var webtoon = snapshot.data![index];
+                  print(index);
+                  return Text(webtoon.title);
+                },
+                separatorBuilder: (context, index) => const SizedBox(
+                  width: 20,
+                ),
               );
             }
             return const Center(
