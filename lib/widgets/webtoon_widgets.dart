@@ -27,18 +27,21 @@ class Webtoon extends StatelessWidget {
       },
       child: Column(
         children: [
-          Container(
-            clipBehavior: Clip.hardEdge,
-            width: 250,
-            child: Image.network(thumb),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.black.withOpacity(0.5),
-                      offset: const Offset(10, 10),
-                      blurRadius: 10),
-                ]),
+          Hero(
+            tag:id,
+            child: Container(
+              clipBehavior: Clip.hardEdge,
+              width: 250,
+              child: Image.network(thumb),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(15),
+                  boxShadow: [
+                    BoxShadow(
+                        color: Colors.black.withOpacity(0.5),
+                        offset: const Offset(10, 10),
+                        blurRadius: 10),
+                  ]),
+            ),
           ),
           const SizedBox(
             height: 10,

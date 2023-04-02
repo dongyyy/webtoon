@@ -13,49 +13,46 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(
-            child: Container(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Scaffold(
+        child: Center(
+          child: Container(
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Scaffold(
+                  backgroundColor: Colors.white,
+                  appBar: AppBar(
+                    elevation: 2,
+                    centerTitle: true,
+                    foregroundColor: Colors.green,
                     backgroundColor: Colors.white,
-                    appBar: AppBar(
-                      elevation: 2,
-                      centerTitle: true,
-                      foregroundColor: Colors.green,
-                      backgroundColor: Colors.white,
-                      title: const Text(
-                        "오늘의 웝툰",
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w600,
-                        ),
+                    title: const Text(
+                      "오늘의 웝툰",
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.w600,
                       ),
                     ),
-                    body: FutureBuilder(
-                      future: webtoons, //await 해줄 필요 없이 futureBuilder가 해줌
-                      builder: (context, AsyncSnapshot snapshot) {
-                        //snapshot을 이용하면 Future의 상태를 알 수 있음 - Future가 데이터를 받았는지, 아니면 오류를 받았는지 알 수 있음. connectionState도 알 수 있음
-                        if (snapshot.hasData) {
-                          return SizedBox(
-                            child: Column(
-                              children: [
-                                const SizedBox(
-                                  height: 50,
-                                ),
-                                Expanded(child: makeList(snapshot))
-                              ],
-                            ),
-                          );
-                        }
-                        return const Center(
-                          child: CircularProgressIndicator(),
+                  ),
+                  body: FutureBuilder(
+                    future: webtoons, //await 해줄 필요 없이 futureBuilder가 해줌
+                    builder: (context, AsyncSnapshot snapshot) {
+                      //snapshot을 이용하면 Future의 상태를 알 수 있음 - Future가 데이터를 받았는지, 아니면 오류를 받았는지 알 수 있음. connectionState도 알 수 있음
+                      if (snapshot.hasData) {
+                        return SizedBox(
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 50,
+                              ),
+                              Expanded(child: makeList(snapshot))
+                            ],
+                          ),
                         );
-                      },
-                    )),
-              ),
+                      }
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  )),
             ),
           ),
         ),
