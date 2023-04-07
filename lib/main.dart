@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:toonflix/screens/home_screen.dart';
-import 'package:toonflix/services/MyHttpOverrides.dart';
+import 'package:toonflix/services/http_overrides.dart';
 
 void main() {
   HttpOverrides.global = MyHttpOverrides();
