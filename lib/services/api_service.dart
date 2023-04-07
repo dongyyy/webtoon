@@ -36,7 +36,8 @@ class ApiService {
     throw Error();
   }
 
-  static Future<List<WebtoonEpisodeModel>> getLatestEpisodeByid(String id) async {
+  static Future<List<WebtoonEpisodeModel>> getLatestEpisodeById(
+      String id) async {
     final List<WebtoonEpisodeModel> episodesInstances = [];
     final url = Uri.parse('$baseUrl/$id/episodes');
     final response = await http.get(url);

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:toonflix/models/webtoon_detail_model.dart';
 import 'package:toonflix/models/webtoon_episode_model.dart';
@@ -25,7 +27,7 @@ class _DetailScreenState extends State<DetailScreen> {
   void initState() {
     super.initState();
     webtoon = ApiService.getToonById(widget.id);
-    episodes = ApiService.getLatestEpisodeByid(widget.id);
+    episodes = ApiService.getLatestEpisodeById(widget.id);
   }
 
   @override
@@ -71,20 +73,42 @@ class _DetailScreenState extends State<DetailScreen> {
                           ]),
                     ),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    widget.title,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
                 ],
               ),
             ],
+          ),
+          const SizedBox(
+            height: 25,
+          ),
+          FutureBuilder(
+            future: webtoon,
+            builder: (context, AsyncSnapshot snapshot) {
+              if (snapshot.hasData) {
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 50),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        snapshot.data!.about,
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(
+                        height: 15,
+                      ),
+                      Text(
+                        "${snapshot.data!.genre} / ${snapshot.data!.age}",
+                        style: const TextStyle(fontSize: 16),
+                      ),
+                    ],
+                  ),
+                );
+              }
+              return const Text(
+                '...',
+                style: TextStyle(fontSize: 20),
+              );
+            },
           ),
         ],
       ),
